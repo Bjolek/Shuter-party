@@ -18,11 +18,11 @@ class Player1:
 
 
         if keys[pygame.K_d]:
-            self.hit_box.y -= self.speed
+            self.hit_box.x += self.speed
         if keys[pygame.K_a]:
             self.hit_box.x -= self.speed
         if keys[pygame.K_w]:
-            self.hit_box.x += self.speed
+            self.hit_box.y -= self.speed
         if keys[pygame.K_s]:
             self.hit_box.y += self.speed
 

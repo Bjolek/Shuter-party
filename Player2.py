@@ -17,11 +17,11 @@ class Player2:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_l]:
-            self.hit_box.x -= self.speed
+            self.hit_box.x += self.speed
         if keys[pygame.K_j]:
             self.hit_box.x -= self.speed
         if keys[pygame.K_i]:
-            self.hit_box.y += self.speed
+            self.hit_box.y -= self.speed
         if keys[pygame.K_k]:
             self.hit_box.y += self.speed
 
