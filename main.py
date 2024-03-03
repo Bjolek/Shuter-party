@@ -41,5 +41,15 @@ while game:
     if PL2.hit_box.y < 0:
         PL2.hit_box.y = 800
     Walls.render(window)
+
+    for B in PL1.bullets:
+        B.render(window)
+        B.move()
+
+    for B in PL2.bullets:
+        B.render(window)
+        B.move()
+
+
     pygame.display.flip()
     fps.tick(60)
