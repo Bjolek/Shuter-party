@@ -1,16 +1,20 @@
 import pygame
 import Player1
 import Player2
-import Wall
+from Wall import wall
 
 PL1 = Player1.Player1(370, 700, 30, 50, 10, "Player1.png")
 PL2 = Player2.Player2(370, 100, 30, 50, 10, "Player2.png")
-Walls = Wall.Walls(0, 30, 800, 800, "Walls.png")
 
 
 
 window = pygame.display.set_mode((800, 800))
 fps = pygame.time.Clock()
+
+
+walls = []
+walls.append(wall(200, 50, 50, 20,(255, 255, 0)))
+walls.append(wall(247, 48, 50, 20, (255, 255, 0)))
 
 game = True
 while game:
@@ -42,23 +46,25 @@ while game:
     if PL2.hit_box.y < 0:
         PL2.hit_box.y = 800
 
-
-
-    Walls.render(window)
-
     for B in PL1.bulles:
         B.render(window)
         B.move()
         if B.hit_box.colliderect(PL2.hit_box):
             game = False
-
+        for wall in walls:
+            if B.hit_box.colliderect(wall.rect):
+                PL1.bulles.remove(B)
 
     for B in PL2.bulles:
         B.render(window)
         B.move()
         if B.hit_box.colliderect(PL1.hit_box):
             game = False
+        for wall in walls:
+            if B.hit_box.colliderect(wall.rect):
+                PL2.bulles.remove(B)
 
-
+    for Wall in walls:
+        Wall.render(window)
     pygame.display.flip()
     fps.tick(60)
