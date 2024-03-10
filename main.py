@@ -3,8 +3,8 @@ import Player1
 import Player2
 from Wall import wall
 
-PL1 = Player1.Player1(370, 700, 30, 50, 10, "Player1.png")
-PL2 = Player2.Player2(370, 100, 30, 50, 10, "Player2.png")
+PL1 = Player1.Player1(370, 600, 30, 50, 10, "Player1.png")
+PL2 = Player2.Player2(370, 70, 30, 50, 10, "Player2.png")
 
 
 
@@ -13,8 +13,14 @@ fps = pygame.time.Clock()
 
 
 walls = []
-walls.append(wall(200, 50, 50, 20,(255, 255, 0)))
-walls.append(wall(247, 48, 50, 20, (255, 255, 0)))
+walls.append(wall(40, 130, 20, 160,(255, 255, 0)))
+walls.append(wall(310, 190, 20, 160, (255, 255, 0)))
+walls.append(wall(600, 130, 20, 160, (255, 255, 0)))
+
+walls.append(wall(40, 600, 20, 160,(255, 255, 0)))
+walls.append(wall(310, 520, 20, 160, (255, 255, 0)))
+walls.append(wall(600, 600, 20, 160, (255, 255, 0)))
+
 
 game = True
 while game:
@@ -66,5 +72,16 @@ while game:
 
     for Wall in walls:
         Wall.render(window)
+
+    for Wall in walls:
+        if Wall.rect.colliderect(PL1.hit_box):
+            if PL1.derection == "верх":
+                PL1.hit_box.y += PL1.speed
+            if PL1.derection == "вниз":
+                PL1.hit_box.y -= PL1.speed
+            if PL1.derection == "вправо":
+                PL1.hit_box.x -= PL1.speed
+            if PL1.derection == "вліво":
+                PL1.hit_box.x += PL1.speed
     pygame.display.flip()
     fps.tick(60)
