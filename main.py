@@ -83,5 +83,17 @@ while game:
                 PL1.hit_box.x -= PL1.speed
             if PL1.derection == "вліво":
                 PL1.hit_box.x += PL1.speed
+
+    for Wall in walls:
+        if Wall.rect.colliderect(PL2.hit_box):
+            if PL2.derection == "верх":
+                PL2.hit_box.y += PL1.speed
+            if PL2.derection == "вниз":
+                PL2.hit_box.y -= PL1.speed
+            if PL2.derection == "вправо":
+                PL2.hit_box.x -= PL1.speed
+            if PL2.derection == "вліво":
+                PL2.hit_box.x += PL1.speed
+
     pygame.display.flip()
     fps.tick(60)
