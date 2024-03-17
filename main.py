@@ -2,14 +2,40 @@ import pygame
 import Player1
 import Player2
 from Wall import wall
+import time
+
+def emd_Game(window, text):
+    fps = pygame.time.Clock()
+    game = True
+    while game:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game = False
+                pygame.quit()
+            
+        window.blit(text, (200,400))
+        pygame.display.flip()
+        fps.tick(60)
+
+
+
+
+
+
+pygame.init()
+pygame.font.init()
 
 PL1 = Player1.Player1(370, 600, 30, 50, 10, "Player1.png")
 PL2 = Player2.Player2(370, 70, 30, 50, 10, "Player2.png")
 
-
+start_time = time.time()
+Curent_time = pygame.font.SysFont(None, 20).render("Час:",True, (0,0,0))
+PL1_win = pygame.font.SysFont(None, 100).render("Player1 WIN",True, (0,0,0))
+PL2_win = pygame.font.SysFont(None, 100).render("Player2 WIN",True, (0,0,0))
 
 window = pygame.display.set_mode((800, 800))
 fps = pygame.time.Clock()
+
 
 
 walls = []
@@ -57,6 +83,8 @@ while game:
         B.move()
         if B.hit_box.colliderect(PL2.hit_box):
             game = False
+            emd_Game(window,PL2_win)
+
         for wall in walls:
             if B.hit_box.colliderect(wall.rect):
                 PL1.bulles.remove(B)
@@ -66,6 +94,8 @@ while game:
         B.move()
         if B.hit_box.colliderect(PL1.hit_box):
             game = False
+            emd_Game(window,PL1_win)
+
         for wall in walls:
             if B.hit_box.colliderect(wall.rect):
                 PL2.bulles.remove(B)
@@ -94,6 +124,11 @@ while game:
                 PL2.hit_box.x -= PL1.speed
             if PL2.derection == "вліво":
                 PL2.hit_box.x += PL1.speed
+
+    current_time =round(time.time() - start_time)
+    Curent_time = pygame.font.SysFont(None, 20).render("Час:" + str(current_time), True, (0, 0, 0))
+
+    window.blit(Curent_time, (10, 10))
 
     pygame.display.flip()
     fps.tick(60)
