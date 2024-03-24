@@ -1,6 +1,6 @@
 import pygame
 
-class wall:
+class Wall:
 
     def __init__(self, x, y, h, w, color):
        self.rect = pygame.rect.Rect(x,y,w,h)

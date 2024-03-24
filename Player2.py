@@ -2,6 +2,7 @@ import pygame
 import Bullet
 import time
 
+
 class Player2:
     def __init__(self, x, y, w, h, speed, texture):
         self.speed = speed
