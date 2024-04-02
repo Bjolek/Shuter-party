@@ -3,8 +3,8 @@ import Bullet
 import time
 
 
-class Player1:
-    def __init__(self, x, y, w, h, speed, texture):
+class Player:
+    def __init__(self, x, y, w, h, speed, texture, K_UO, K_Down, K_Left, K_Right, K_Shoot, ShootDirection):
         self.speed = speed
         self.texture = pygame.image.load(texture)
         self.texture = pygame.transform.scale(self.texture,(w, h ))
@@ -14,6 +14,12 @@ class Player1:
         self.bulles = []
         self.last_shot_time = time.time()
         self.derection = ("вгору")
+        self.K_UO = K_UO
+        self.K_Down = K_Down
+        self.K_Left = K_Left
+        self.K_Right = K_Right
+        self.K_Shoot = K_Shoot
+        self.ShootDirection = ShootDirection
 
     def render (self, window):
         window.blit(self.texture, (self.hit_box.x, self.hit_box.y))
@@ -34,18 +40,21 @@ class Player1:
         keys = pygame.key.get_pressed()
 
 
-        if keys[pygame.K_d]:
+        if keys[self.K_Right]:
             self.hit_box.x += self.speed
             self.derection="вправо"
-        if keys[pygame.K_a]:
+        if keys[self.K_Left]:
             self.hit_box.x -= self.speed
             self.derection = "вліво"
-        if keys[pygame.K_w]:
+        if keys[self.K_UO]:
             self.hit_box.y -= self.speed
             self.derection = "верх"
-        if keys[pygame.K_s]:
+        if keys[self.K_Down]:
             self.derection = "вниз"
             self.hit_box.y += self.speed
-        if keys[pygame.K_SPACE] and self.bullet_time_to_shot():
-            self.bulles.append(Bullet.Bullet(self.hit_box.x, self.hit_box.y, 7 ,20, 5, "bullet.png"))
+        if keys[self.K_Shoot] and self.bullet_time_to_shot():
+            self.bulles.append(Bullet.Bullet(self.hit_box.x, self.hit_box.y, 7 ,20, 5 if self.ShootDirection == True else -5, "bullet.png"))
+
+
+
 

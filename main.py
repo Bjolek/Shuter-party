@@ -1,6 +1,5 @@
 import pygame
-import Player1
-import Player2
+import Player
 from Wall import Wall
 import time
 
@@ -28,8 +27,8 @@ def start_game():
     pygame.init()
     pygame.font.init()
 
-    PL1 = Player1.Player1(370, 600, 30, 50, 10, "Player1.png")
-    PL2 = Player2.Player2(370, 70, 30, 50, 10, "Player2.png")
+    PL1 = Player.Player(370, 600, 30, 50, 10, "Player1.png",pygame.K_w, pygame.K_s, pygame.K_a,pygame.K_d,pygame.K_SPACE,True)
+    PL2 = Player.Player(370, 70, 30, 50, 10, "Player2.png",pygame.K_i, pygame.K_k,pygame.K_j,pygame.K_l, pygame.K_n,False)
 
     start_time = time.time()
     Curent_time = pygame.font.SysFont(None, 20).render("Час:",True, (0,0,0))
